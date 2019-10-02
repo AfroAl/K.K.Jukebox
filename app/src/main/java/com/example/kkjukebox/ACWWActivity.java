@@ -149,6 +149,7 @@ public class ACWWActivity extends AppCompatActivity implements RadioGroup.OnChec
     @Override
     public void onClick(View v) {
 
+        //Stuff for sleep timer
         /*if(v == startTimer) {
             countDownTimer = new CountDownTimer(Integer.parseInt(n.getText().toString())*60000, 1000) {
                 private int minutes = Integer.parseInt(n.getText().toString());

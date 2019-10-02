@@ -149,6 +149,7 @@ public class ACNLActivity extends AppCompatActivity implements RadioGroup.OnChec
     @Override
     public void onClick(View v) {
 
+        //Stuff for sleep timer
         /*if(v == startTimer) {
             countDownTimer = new CountDownTimer(Integer.parseInt(n.getText().toString())*60000, 1000) {
                 private int minutes = Integer.parseInt(n.getText().toString());
@@ -195,20 +196,21 @@ public class ACNLActivity extends AppCompatActivity implements RadioGroup.OnChec
         }*/
         if(v == ac) {
             Intent i = new Intent(this, ACActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
         }
         else if(v == acww ) {
             Intent i = new Intent(this, ACWWActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
         }
         else if(v == accf) {
             Intent i = new Intent(this, ACCFActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
+            finish();
         }
         else if(v == acnl) {
             //Do Nothing

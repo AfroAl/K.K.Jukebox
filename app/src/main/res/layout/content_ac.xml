@@ -70,13 +70,6 @@
                 android:text="Rainy"
                 android:visibility="visible" />
 
-            <RadioButton
-                android:id="@+id/snowy_ac"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:text="Snowy"
-                android:visibility="visible" />
-
         </RadioGroup>
 
         <LinearLayout

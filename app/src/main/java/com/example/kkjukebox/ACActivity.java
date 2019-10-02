@@ -25,7 +25,7 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
     private ImageButton stop;
     private int playPause = -1;
     private Timer t = new Timer();
-    private RadioButton sunny, rainy, snowy;
+    private RadioButton sunny, rainy;
     private Button ac, acww, accf, acnl;
     private int weatherButton = -1;
     private RadioGroup weatherRadio;
@@ -45,7 +45,6 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
 
         sunny = findViewById(R.id.sunny_ac);
         rainy = findViewById(R.id.rainy_ac);
-        snowy = findViewById(R.id.snowy_ac);
 
         ac = findViewById(R.id.ac_ac);
         acww = findViewById(R.id.acww_ac);
@@ -68,19 +67,13 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
 
         if(sunny.isChecked())
         {
-            System.out.println("YES");
             weatherButton = 0;
-            t.schedule(new TimeCheck_acnl(this, 0), 0, 500);
+            t.schedule(new TimeCheck_ac(this, 0), 0, 500);
         }
         else if(rainy.isChecked())
         {
             weatherButton = 1;
-            t.schedule(new TimeCheck_acnl(this, 1), 0, 500);
-        }
-        else if(snowy.isChecked())
-        {
-            weatherButton = 2;
-            t.schedule(new TimeCheck_acnl(this, 2), 0, 500);
+            t.schedule(new TimeCheck_ac(this, 1), 0, 500);
         }
     }
 
@@ -88,9 +81,8 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
         super.onDestroy();
         t.cancel();
         t.purge();
-        stopService(new Intent(this, SunnyService_acnl.class));
-        stopService(new Intent(this, RainyService_acnl.class));
-        stopService(new Intent(this, SnowyService_acnl.class));
+        stopService(new Intent(this, SunnyService_ac.class));
+        stopService(new Intent(this, RainyService_ac.class));
     }
 
     @Override
@@ -133,23 +125,19 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
         if(sunny.isChecked())
         {
             weatherButton = 0;
-            t.schedule(new TimeCheck_acnl(this, weatherButton), 0, 500);
+            t.schedule(new TimeCheck_ac(this, weatherButton), 0, 500);
         }
         else if(rainy.isChecked())
         {
             weatherButton = 1;
-            t.schedule(new TimeCheck_acnl(this, weatherButton), 0, 500);
-        }
-        else if(snowy.isChecked())
-        {
-            weatherButton = 2;
-            t.schedule(new TimeCheck_acnl(this, weatherButton), 0, 500);
+            t.schedule(new TimeCheck_ac(this, weatherButton), 0, 500);
         }
     }
 
     @Override
     public void onClick(View v) {
 
+        //Stuff for sleep timer
         /*if(v == startTimer) {
             countDownTimer = new CountDownTimer(Integer.parseInt(n.getText().toString())*60000, 1000) {
                 private int minutes = Integer.parseInt(n.getText().toString());
@@ -201,16 +189,19 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
             Intent i = new Intent(this, ACWWActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
+            finish();
         }
         else if(v == accf) {
             Intent i = new Intent(this, ACCFActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
+            finish();
         }
         else if(v == acnl) {
             Intent i = new Intent(this, ACNLActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
+            finish();
         }
         else if(v == stop) {
             if(playPause == 0)
@@ -224,9 +215,8 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
             else if(playPause == 1)
             {
                 stop.setImageResource(R.drawable.play);
-                stopService(new Intent(this, SunnyService_acnl.class));
-                stopService(new Intent(this, RainyService_acnl.class));
-                stopService(new Intent(this, SnowyService_acnl.class));
+                stopService(new Intent(this, SunnyService_ac.class));
+                stopService(new Intent(this, RainyService_ac.class));
                 playPause = 0;
                 //show_Notification();
             }

@@ -28,6 +28,8 @@
         <service android:name=".SunnyService_acnl" />
         <service android:name=".RainyService_acnl" />
         <service android:name=".SnowyService_acnl" />
+        <service android:name=".SunnyService_ac" />
+        <service android:name=".RainyService_ac" />
 
         <receiver android:name=".pauseBR" />
         <receiver android:name=".playBR" />

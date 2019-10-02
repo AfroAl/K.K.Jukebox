@@ -87,6 +87,7 @@ public class RainyService_acnl extends Service {
             return n;
         }
 
+        /* Potential Code for Holiday Music
         if(dt == 11 && mt == 1) {
             n = R.raw.festivale_acnl;
             return n;
@@ -150,7 +151,7 @@ public class RainyService_acnl extends Service {
         if(mt == 0 && dt == 1) {
             n = R.raw.nyd_acnl;
             return n;
-        }
+        }*/
 
         n = rainySongs[h];
         return n;
@@ -158,7 +159,7 @@ public class RainyService_acnl extends Service {
 
     public void setUpKK() {
         for(int i=1; i<=70; i++) {
-            kksongs[i-1] = this.getResources().getIdentifier("kk".concat(Integer.toString(i)), "raw", this.getPackageName());
+            kksongs[i-1] = this.getResources().getIdentifier("kk".concat(Integer.toString(i)).concat("_acnl"), "raw", this.getPackageName());
         }
     }
 }
