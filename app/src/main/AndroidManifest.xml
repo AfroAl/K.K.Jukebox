@@ -31,8 +31,6 @@
         <service android:name=".SunnyService_ac" />
         <service android:name=".RainyService_ac" />
 
-        <receiver android:name=".pauseBR" />
-        <receiver android:name=".playBR" />
     </application>
 
 </manifest>

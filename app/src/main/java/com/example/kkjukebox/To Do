@@ -1,10 +1,24 @@
 Weather (Sunny, Rainy, Snowy)       |   X   |
-K.K. Songs                          |       |
-Different Game Songs                |       |
-Holiday Songs for ACNL              |   X   |
+
+K.K. Songs: (Not Aircheck)
+                ACNL                |   X   |
+                AC                  |   X   |
+                ACWW                |       |
+                ACCF                |       |
+
+Different Game Songs:
+               AC                   |   X   |
+               ACWW                 |       |
+               ACCF                 |       |
+
+Holiday Songs:
+                ACNL                |       |
+                AC                  |       |
+                ACWW                |       |
+                ACCF                |       |
+
 Rain Sound Effect Toggle            |       |
-Sleep Timer                         |   X   |
 
+Sleep Timer                         |       |
 
-Save Settings on Destroy            |       |
-Don't restart on kill               |   X   |
+Save defaults for music             |       |

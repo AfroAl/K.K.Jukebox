@@ -80,7 +80,7 @@
         </RadioGroup>
 
         <LinearLayout
-            android:id="@+id/buttons_accf"
+            android:id="@+id/games_accf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -124,74 +124,6 @@
                 android:clickable="true"
                 android:onClick="onClick"
                 android:text="ACNL" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="0dp"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/TIME"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="140dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="140dp"
-                android:gravity="center"
-                android:text="00:00"
-                android:textColor="@android:color/background_dark"
-                android:textSize="36sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <EditText
-                android:id="@+id/minsToSleep"
-                android:layout_width="61dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
-                android:ems="10"
-                android:inputType="number"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/setTimer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="4dp"
-                    android:text="Start" />
-
-                <Button
-                    android:id="@+id/resetTimer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="4dp"
-                    android:text="Reset" />
-            </LinearLayout>
-
         </LinearLayout>
 
     </LinearLayout>
