@@ -4,11 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ACNLActivity"
     tools:showIn="@layout/activity_acnl">
 
+    <ImageButton
+        android:id="@+id/kk_acnl"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:adjustViewBounds="false"
+        android:background="@android:color/transparent"
+        android:cropToPadding="false"
+        android:onClick="onClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/kk" />
+
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -50,7 +67,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="0dp"
-            android:checkedButton="@id/sunny_acnl"
+            android:backgroundTintMode="add"
             android:clickable="true"
             android:orientation="horizontal"
             android:visibility="visible">
@@ -59,7 +76,7 @@
                 android:id="@+id/sunny_acnl"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
-                android:checked="true"
+                android:checked="false"
                 android:text="Sunny"
                 android:visibility="visible" />
 
@@ -91,18 +108,8 @@
                 android:id="@+id/ac_acnl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#D5D3D3"
                 android:onClick="onClick"
                 android:text="AC" />
-
-            <Button
-                android:id="@+id/acww_acnl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#D5D3D3"
-                android:onClick="onClick"
-                android:text="ACWW" />
 
             <Button
                 android:id="@+id/accf_acnl"
@@ -118,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
+                android:backgroundTint="@android:color/background_light"
                 android:clickable="false"
                 android:text="ACNL" />
         </LinearLayout>

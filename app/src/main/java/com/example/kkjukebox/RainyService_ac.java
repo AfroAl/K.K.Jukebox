@@ -76,7 +76,7 @@ public class RainyService_ac extends Service {
         setUpKK(); //Initialize K.K. songs
 
         createNotificationChannel();
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "service")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "Service")
                 .setSmallIcon(R.drawable.ic_leaf)
                 .setContentTitle("Chill out to them funky fresh jams!")
                 .setContentText("K.K. style!")

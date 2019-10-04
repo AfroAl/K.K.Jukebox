@@ -96,16 +96,6 @@
                 android:text="AC" />
 
             <Button
-                android:id="@+id/acww_acww"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
-                android:clickable="false"
-                android:onClick="onClick"
-                android:text="ACWW" />
-
-            <Button
                 android:id="@+id/accf_acww"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

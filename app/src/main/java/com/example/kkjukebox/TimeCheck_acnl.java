@@ -24,6 +24,7 @@ public class TimeCheck_acnl extends TimerTask {
         }
         else
         {
+            System.out.println(button);
             //Stop all current services
             c.stopService(new Intent(c, SunnyService_acnl.class));
             c.stopService(new Intent(c, RainyService_acnl.class));
@@ -32,7 +33,6 @@ public class TimeCheck_acnl extends TimerTask {
             if(button == 0) { //Start sunny music service
                 c.stopService(new Intent(c, SunnyService_acnl.class));
                 c.startForegroundService(new Intent(c, SunnyService_acnl.class));
-
             }
             else if(button == 1) { //Start rainy music service
                 c.stopService(new Intent(c, RainyService_acnl.class));

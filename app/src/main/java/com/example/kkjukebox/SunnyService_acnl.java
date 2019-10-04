@@ -76,14 +76,14 @@ public class SunnyService_acnl extends Service {
         setUpKK(); //Initialize K.K. songs
 
         createNotificationChannel();
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "service")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "Service")
                 .setSmallIcon(R.drawable.ic_leaf)
                 .setContentTitle("Chill out to them funky fresh jams!")
                 .setContentText("K.K. style!")
                 .setColor(ContextCompat.getColor(this, R.color.leafGreen));
 
         Notification notification = builder.build();
-        startForeground(1337, notification);
+        startForeground(1, notification);
     }
 
     @Override

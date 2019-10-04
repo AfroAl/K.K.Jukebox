@@ -8,6 +8,16 @@
     tools:context=".ACCFActivity"
     tools:showIn="@layout/activity_accf">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/kk" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -97,20 +107,11 @@
                 android:text="ACWW" />
 
             <Button
-                android:id="@+id/acww_accf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#D5D3D3"
-                android:onClick="onClick"
-                android:text="ACWW" />
-
-            <Button
                 android:id="@+id/accf_accf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
+                android:backgroundTint="@android:color/background_light"
                 android:clickable="false"
                 android:onClick="onClick"
                 android:text="@string/accf" />

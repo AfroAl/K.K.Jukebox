@@ -23,7 +23,7 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
     private RadioButton sunny, rainy;
     private RadioGroup weatherRadio;
 
-    private Button acnl, acww, accf;
+    private Button acnl, accf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,6 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
 
         //Set buttons to change game music
         acnl = findViewById(R.id.ac_acnl);
-        acww = findViewById(R.id.acww_acnl);
         accf = findViewById(R.id.accf_acnl);
 
 
@@ -112,12 +111,6 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
     public void onClick(View v) {
         if(v == acnl) { //Switch to Animal Crossing: New Leaf music
             Intent i = new Intent(this, ACNLActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-            finish();
-        }
-        else if(v == acww ) { //Switch to Animal Crossing: Wild World music
-            Intent i = new Intent(this, ACWWActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();

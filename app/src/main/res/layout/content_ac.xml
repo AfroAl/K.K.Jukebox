@@ -8,6 +8,16 @@
     tools:context=".ACActivity"
     tools:showIn="@layout/activity_ac">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/kk" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -84,19 +94,10 @@
                 android:id="@+id/ac_ac"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#00FFFFFF"
+                android:backgroundTint="@android:color/background_light"
                 android:clickable="false"
                 android:onClick="onClick"
                 android:text="AC" />
-
-            <Button
-                android:id="@+id/acww_ac"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#D5D3D3"
-                android:onClick="onClick"
-                android:text="ACWW" />
 
             <Button
                 android:id="@+id/accf_ac"
