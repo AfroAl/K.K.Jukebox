@@ -183,6 +183,7 @@ public class ACCFActivity extends AppCompatActivity implements RadioGroup.OnChec
                 stopService(new Intent(this, SunnyService_accf.class));
                 stopService(new Intent(this, RainyService_accf.class));
                 stopService(new Intent(this, SnowyService_accf.class));
+                stopService(new Intent(this, kkAlwaysService.class));
                 playPause = 0;
             }
         }

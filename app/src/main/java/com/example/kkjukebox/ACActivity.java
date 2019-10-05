@@ -176,6 +176,7 @@ public class ACActivity extends AppCompatActivity implements RadioGroup.OnChecke
                 musicControl.setImageResource(R.drawable.play);
                 stopService(new Intent(this, SunnyService_ac.class));
                 stopService(new Intent(this, RainyService_ac.class));
+                stopService(new Intent(this, kkAlwaysService.class));
                 playPause = 0;
             }
         }
