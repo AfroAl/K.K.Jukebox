@@ -1,105 +1,87 @@
 package com.example.kkjukebox;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.Timer;
 
 public class ACCFActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
-    private ImageButton stop;
     private int playPause = -1;
+    private ImageButton musicControl;
     private Timer t = new Timer();
+
     private RadioButton sunny, rainy, snowy;
-    private Button ac, acww, accf, acnl;
-    private int weatherButton = -1;
     private RadioGroup weatherRadio;
 
-    private Button startTimer, resetTimer;
-    private CountDownTimer countDownTimer;
-    private TextView tv;
-    private EditText n;
-    //private Notification notification;
+    private Button ac, acnl;
+    private ImageButton kk;
+    private int kk_pref;
+
+    private RadioButton always;
+    private RadioButton saturday;
+    private RadioButton never;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accf);
-        //Toolbar toolbar = findViewById(R.id.toolbar_accf);
-        //setSupportActionBar(toolbar);
 
+        int weather = getIntent().getIntExtra("weather", 0);
+        kk_pref = getIntent().getIntExtra("kk", 2);
+
+        //Set pause/play button
+        playPause = 1;
+        musicControl = findViewById(R.id.pause_accf);
+
+        //Set radio buttons
         sunny = findViewById(R.id.sunny_accf);
         rainy = findViewById(R.id.rainy_accf);
         snowy = findViewById(R.id.snowy_accf);
 
-        ac = findViewById(R.id.ac_accf);
-        acww = findViewById(R.id.acww_accf);
-        accf = findViewById(R.id.accf_accf);
-        acnl = findViewById(R.id.acnl_accf);
-
-        startTimer = findViewById(R.id.setTimer);
-        resetTimer = findViewById(R.id.resetTimer);
-        n = findViewById(R.id.minsToSleep);
-        tv = findViewById(R.id.TIME);
-
-        startTimer.setOnClickListener(this);
-        resetTimer.setOnClickListener(this);
-
-
-        stop = findViewById(R.id.pause_accf);
-        playPause = 1;
+        //Set listener for when a radio button is pressed
         weatherRadio = findViewById(R.id.weather_accf);
         weatherRadio.setOnCheckedChangeListener(this);
+        weatherRadio.clearCheck();
 
-        if(sunny.isChecked())
-        {
-            weatherButton = 0;
-            t.schedule(new TimeCheck_acnl(this, 0), 0, 500);
+        //Set buttons to change game music
+        ac = findViewById(R.id.ac_accf);
+        acnl = findViewById(R.id.acnl_accf);
+
+        kk = findViewById(R.id.kk_ac);
+        kk.setOnClickListener(this);
+
+        if(weather == 0) {
+            sunny.setChecked(true);
         }
-        else if(rainy.isChecked())
-        {
-            weatherButton = 1;
-            t.schedule(new TimeCheck_acnl(this, 1), 0, 500);
+        else if(weather == 1) {
+            rainy.setChecked(true);
         }
-        else if(snowy.isChecked())
-        {
-            weatherButton = 2;
-            t.schedule(new TimeCheck_acnl(this, 2), 0, 500);
+        else if(weather == 2) {
+            snowy.setChecked(true);
         }
     }
 
+    //Called on BACK button pressed on phone/ app dismissed in Overview
     protected void onDestroy() {
         super.onDestroy();
         t.cancel();
         t.purge();
-        stopService(new Intent(this, SunnyService_acnl.class));
-        stopService(new Intent(this, RainyService_acnl.class));
-        stopService(new Intent(this, SnowyService_acnl.class));
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+        stopService(new Intent(this, SunnyService_accf.class));
+        stopService(new Intent(this, RainyService_accf.class));
+        stopService(new Intent(this, SnowyService_accf.class));
+        stopService(new Intent(this, kkAlwaysService.class));
     }
 
     @Override
@@ -118,118 +100,91 @@ public class ACCFActivity extends AppCompatActivity implements RadioGroup.OnChec
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-
-
+    //Change weather type via Radio Buttons
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        t.purge();
-        if(sunny.isChecked())
-        {
-            weatherButton = 0;
-            t.schedule(new TimeCheck_acnl(this, weatherButton), 0, 500);
+        if(playPause == 0) {
+            musicControl.setImageResource(R.drawable.pause);
+            playPause = 1;
         }
-        else if(rainy.isChecked())
-        {
-            weatherButton = 1;
-            t.schedule(new TimeCheck_acnl(this, weatherButton), 0, 500);
+
+        if(sunny.isChecked()) {
+            t.schedule(new TimeCheck_accf(this, 0, kk_pref), 0, 500);
         }
-        else if(snowy.isChecked())
-        {
-            weatherButton = 2;
-            t.schedule(new TimeCheck_acnl(this, weatherButton), 0, 500);
+        else if(rainy.isChecked()) {
+            t.schedule(new TimeCheck_accf(this, 1, kk_pref), 0, 500);
         }
+        else if(snowy.isChecked()) {
+            t.schedule(new TimeCheck_accf(this, 2, kk_pref), 0, 500);
+        }
+    }
+
+    private void showRadioButtonDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.radiobutton_dialog);
+        RadioGroup rg = dialog.findViewById(R.id.kk_ac);
+        always = dialog.findViewById(R.id.always);
+        saturday = dialog.findViewById(R.id.saturday);
+        never = dialog.findViewById(R.id.never);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                System.out.println(kk_pref);
+                if(always.isChecked()) {
+                    kk_pref = 0;
+                }
+                else if(saturday.isChecked()) {
+                    kk_pref = 1;
+                }
+                else if(never.isChecked()) {
+                    kk_pref = 2;
+                }
+
+                ACCFActivity.this.onCheckedChanged(weatherRadio, 0);
+            }
+        });
+        dialog.show();
     }
 
     @Override
     public void onClick(View v) {
-
-        //Stuff for sleep timer
-        /*if(v == startTimer) {
-            countDownTimer = new CountDownTimer(Integer.parseInt(n.getText().toString())*60000, 1000) {
-                private int minutes = Integer.parseInt(n.getText().toString());
-                private int seconds = 0;
-
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    if(seconds == 0)
-                    {
-                        minutes--;
-                        seconds = 59;
-                    }
-
-                    String s;
-                    if(seconds < 10 && minutes < 10) {
-                        s = "0" + minutes + ":0" + seconds;
-                    }
-                    else if(seconds < 10) {
-                        s = minutes + ":0" + seconds;
-                    }
-                    else if(minutes < 10) {
-                        s = "0" + minutes + ":" + seconds;
-                    }
-                    else {
-                        s = minutes + ":" + seconds;
-                    }
-
-                    millisUntilFinished = millisUntilFinished/1000;
-                    tv.setText(s);
-                    seconds--;
-                }
-
-                @Override
-                public void onFinish() {
-                    onDestroy();
-                    int pid = android.os.Process.myPid();
-                    android.os.Process.killProcess(pid);
-                }
-            }.start();
+        if(v == kk) {
+            showRadioButtonDialog();
         }
-        else if(v == resetTimer) {
-            countDownTimer.cancel();
-            tv.setText("00:00");
-        }*/
-        if(v == ac) {
+        else if(v == ac) { //Switch to Animal Crossing (GC) music
             Intent i = new Intent(this, ACActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
+            finish();
         }
-        else if(v == acww ) {
-            Intent i = new Intent(this, ACWWActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-        }
-        else if(v == accf) {
-            //Do Nothing
-        }
-        else if(v == acnl) {
+        else if(v == acnl) { //Switch to Animal Crossing: City Folk music
             Intent i = new Intent(this, ACNLActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
+            finish();
         }
-        else if(v == stop) {
-            if(playPause == 0)
-            {
-                stop.setImageResource(R.drawable.pause);
+        else if(v == musicControl) { //Pause/ play music
+            if(playPause == 0) { //Play music
+                musicControl.setImageResource(R.drawable.pause);
                 onCheckedChanged(weatherRadio, 0);
                 playPause = 1;
-                //show_Notification_Ongoing();
             }
-            else if(playPause == 1)
-            {
-                stop.setImageResource(R.drawable.play);
-                stopService(new Intent(this, SunnyService_acnl.class));
-                stopService(new Intent(this, RainyService_acnl.class));
-                stopService(new Intent(this, SnowyService_acnl.class));
+            else if(playPause == 1){ //Stop music
+                t = new Timer();
+                musicControl.setImageResource(R.drawable.play);
+                stopService(new Intent(this, SunnyService_accf.class));
+                stopService(new Intent(this, RainyService_accf.class));
+                stopService(new Intent(this, SnowyService_accf.class));
                 playPause = 0;
-                //show_Notification();
             }
         }
-
     }
 }

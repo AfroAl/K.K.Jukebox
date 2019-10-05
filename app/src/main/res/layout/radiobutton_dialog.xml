@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+
+        android:id="@+id/kk_ac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_gravity="center|center_vertical"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+
+        <RadioButton
+            android:id="@+id/always"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/leafGreen"
+            android:text="@string/always_play_k_k_songs" />
+
+        <RadioButton
+            android:id="@+id/saturday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/leafGreen"
+            android:text="@string/play_k_k_songs_on_saturday_8pm_12pm_only" />
+
+        <RadioButton
+            android:id="@+id/never"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/leafGreen"
+            android:text="@string/never_play_k_k_songs" />
+    </RadioGroup>
+</LinearLayout>

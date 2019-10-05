@@ -1,11 +1,7 @@
 package com.example.kkjukebox;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +14,6 @@ import android.widget.RadioGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.util.ArrayList;
 import java.util.Timer;
 
 public class ACNLActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
@@ -29,15 +24,14 @@ public class ACNLActivity extends AppCompatActivity implements RadioGroup.OnChec
 
     private RadioButton sunny, rainy, snowy;
     private RadioGroup weatherRadio;
-    private boolean[] radio = new boolean[2];
 
     private Button ac, accf;
     private ImageButton kk;
+    private int kk_pref;
 
-    public static final String RAINY_STATE = "Rainy_State";
-    public static final String SNOWY_STATE = "Snowy_State";
-    public static final String PREFERENCES = "Prefs";
-    SharedPreferences sp;
+    private RadioButton always;
+    private RadioButton saturday;
+    private RadioButton never;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +40,8 @@ public class ACNLActivity extends AppCompatActivity implements RadioGroup.OnChec
         Toolbar toolbar = findViewById(R.id.toolbar_acnl);
         setSupportActionBar(toolbar);
 
-        //Get saved preferences for radio buttons
-        sp = getSharedPreferences(PREFERENCES, 0);
-        boolean rs = sp.getBoolean(RAINY_STATE, false);
-        boolean ss = sp.getBoolean(SNOWY_STATE, false);
+        int weather = getIntent().getIntExtra("weather", 0);
+        kk_pref = getIntent().getIntExtra("kk", 2);
 
         //Set pause/play button
         playPause = 1;
@@ -63,26 +55,24 @@ public class ACNLActivity extends AppCompatActivity implements RadioGroup.OnChec
         //Set listener for when a radio button is pressed
         weatherRadio = findViewById(R.id.weather_acnl);
         weatherRadio.setOnCheckedChangeListener(this);
-
-        //Decide which radio button to press at launch
-        if(!rs && !ss) {
-            sunny.setChecked(true);
-        }
-        else {
-            if(rs) {
-                rainy.setChecked(rs);
-            }
-            else {
-                snowy.setChecked(ss);
-            }
-        }
+        weatherRadio.clearCheck();
 
         //Set buttons to change game music
         ac = findViewById(R.id.ac_acnl);
         accf = findViewById(R.id.accf_acnl);
 
-        kk = findViewById(R.id.kk_acnl);
+        kk = findViewById(R.id.kk_ac);
         kk.setOnClickListener(this);
+
+        if(weather == 0) {
+            sunny.setChecked(true);
+        }
+        else if(weather == 1) {
+            rainy.setChecked(true);
+        }
+        else if(weather == 2) {
+            snowy.setChecked(true);
+        }
     }
 
     //Called on BACK button pressed on phone/ app dismissed in Overview
@@ -93,6 +83,7 @@ public class ACNLActivity extends AppCompatActivity implements RadioGroup.OnChec
         stopService(new Intent(this, SunnyService_acnl.class));
         stopService(new Intent(this, RainyService_acnl.class));
         stopService(new Intent(this, SnowyService_acnl.class));
+        stopService(new Intent(this, kkAlwaysService.class));
     }
 
     @Override
@@ -111,6 +102,8 @@ public class ACNLActivity extends AppCompatActivity implements RadioGroup.OnChec
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
             return true;
         }
 
@@ -125,31 +118,50 @@ public class ACNLActivity extends AppCompatActivity implements RadioGroup.OnChec
             playPause = 1;
         }
 
-        SharedPreferences.Editor e = sp.edit();
-
         if(sunny.isChecked()) {
-            e.putBoolean(RAINY_STATE, false);
-            e.putBoolean(SNOWY_STATE, false);
-            t.schedule(new TimeCheck_acnl(this, 0), 0, 500);
+            t.schedule(new TimeCheck_acnl(this, 0, kk_pref), 0, 500);
         }
         else if(rainy.isChecked()) {
-            e.putBoolean(RAINY_STATE, rainy.isChecked());
-            e.putBoolean(SNOWY_STATE, false);
-            t.schedule(new TimeCheck_acnl(this, 1), 0, 500);
+            t.schedule(new TimeCheck_acnl(this, 1, kk_pref), 0, 500);
         }
         else if(snowy.isChecked()) {
-            e.putBoolean(RAINY_STATE, false);
-            e.putBoolean(SNOWY_STATE, snowy.isChecked());
-            t.schedule(new TimeCheck_acnl(this, 2), 0, 500);
+            t.schedule(new TimeCheck_acnl(this, 2, kk_pref), 0, 500);
         }
-
-        e.apply();
     }
 
+    private void showRadioButtonDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.radiobutton_dialog);
+        RadioGroup rg = dialog.findViewById(R.id.kk_ac);
+        always = dialog.findViewById(R.id.always);
+        saturday = dialog.findViewById(R.id.saturday);
+        never = dialog.findViewById(R.id.never);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                System.out.println(kk_pref);
+                if(always.isChecked()) {
+                    kk_pref = 0;
+                }
+                else if(saturday.isChecked()) {
+                    kk_pref = 1;
+                }
+                else if(never.isChecked()) {
+                    kk_pref = 2;
+                }
+
+                ACNLActivity.this.onCheckedChanged(weatherRadio, 0);
+            }
+        });
+        dialog.show();
+    }
 
     @Override
     public void onClick(View v) {
-        if(v == ac) { //Switch to Animal Crossing (GC) music
+        if(v == kk) {
+            showRadioButtonDialog();
+        }
+        else if(v == ac) { //Switch to Animal Crossing (GC) music
             Intent i = new Intent(this, ACActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

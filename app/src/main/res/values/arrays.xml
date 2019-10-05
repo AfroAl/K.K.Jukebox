@@ -1,0 +1,48 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+
+    <string-array name="weather_vars">
+        <item>Sunny</item>
+        <item>Rainy</item>
+        <item>Snowy</item>
+    </string-array>
+
+    <string-array name="weather_vals">
+        <item>sun</item>
+        <item>rain</item>
+        <item>hail</item>
+    </string-array>
+
+    <string-array name="game_vars">
+        <item>Animal Crossing</item>
+        <item>Animal Crossing: City Folk</item>
+        <item>Animal Crossing: New Leaf</item>
+    </string-array>
+
+    <string-array name="game_vals">
+        <item>ac</item>
+        <item>accf</item>
+        <item>acnl</item>
+    </string-array>
+
+    <string-array name="kk_vars">
+        <item>Always play K.K. songs</item>
+        <item>Play on Saturday (8pm - 12pm) only</item>
+        <item>Never play K.K. songs</item>
+    </string-array>
+
+    <string-array name="kk_vals">
+        <item>always</item>
+        <item>saturday</item>
+        <item>never</item>
+    </string-array>
+</resources>

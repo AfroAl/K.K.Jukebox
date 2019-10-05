@@ -10,7 +10,7 @@
     tools:showIn="@layout/activity_acnl">
 
     <ImageButton
-        android:id="@+id/kk_acnl"
+        android:id="@+id/kk_ac"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginEnd="4dp"
@@ -22,7 +22,8 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/kk" />
+        app:srcCompat="@drawable/kk"
+        android:contentDescription="@string/image_of_kk" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -55,7 +56,8 @@
                 android:onClick="onClick"
                 android:outlineProvider="none"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/pause" />
+                app:srcCompat="@drawable/pause"
+                android:contentDescription="@string/pause_button" />
 
         </LinearLayout>
 
@@ -76,22 +78,25 @@
                 android:id="@+id/sunny_acnl"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/leafGreen"
                 android:checked="false"
-                android:text="Sunny"
+                android:text="@string/sunny"
                 android:visibility="visible" />
 
             <RadioButton
                 android:id="@+id/rainy_acnl"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
-                android:text="Rainy"
+                android:buttonTint="@color/leafGreen"
+                android:text="@string/rainy"
                 android:visibility="visible" />
 
             <RadioButton
                 android:id="@+id/snowy_acnl"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
-                android:text="Snowy"
+                android:buttonTint="@color/leafGreen"
+                android:text="@string/snowy"
                 android:visibility="visible" />
 
         </RadioGroup>
@@ -109,7 +114,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
-                android:text="AC" />
+                android:text="@string/ac"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/accf_acnl"
@@ -118,7 +124,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="#D5D3D3"
                 android:onClick="onClick"
-                android:text="@string/accf" />
+                android:text="@string/accf"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/acnl_acnl"
@@ -127,7 +134,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/background_light"
                 android:clickable="false"
-                android:text="ACNL" />
+                android:text="@string/acnl"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
 
     </LinearLayout>

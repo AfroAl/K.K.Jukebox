@@ -3,6 +3,7 @@ package com.example.kkjukebox;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -16,8 +17,9 @@ import androidx.core.content.ContextCompat;
 import java.util.Calendar;
 import java.util.Random;
 
-public class SunnyService_ac extends Service {
+public class SunnyService_ac extends Service implements MediaPlayer.OnCompletionListener {
 
+    int kk_pref;
     private MediaPlayer mp;
 
     private float volIn = 0f;
@@ -25,7 +27,7 @@ public class SunnyService_ac extends Service {
     private float speed = 0.05f;
 
     //Arrays for songs
-    private int[] kksongs = new int[56];
+    private int[] kksongs = new int[70];
     private int[] sunnySongs = {R.raw.s0_ac, R.raw.s1_ac, R.raw.s2_ac, R.raw.s3_ac, R.raw.s4_ac, R.raw.s5_ac, R.raw.s6_ac, R.raw.s7_ac, R.raw.s8_ac, R.raw.s9_ac, R.raw.s10_ac, R.raw.s11_ac, R.raw.s12_ac, R.raw.s13_ac, R.raw.s14_ac, R.raw.s15_ac, R.raw.s16_ac, R.raw.s17_ac, R.raw.s18_ac, R.raw.s19_ac, R.raw.s20_ac, R.raw.s21_ac, R.raw.s22_ac, R.raw.s23_ac};
 
     //Found out current song
@@ -74,26 +76,31 @@ public class SunnyService_ac extends Service {
     @Override //Called before onStartCommand
     public void onCreate() {
         setUpKK(); //Initialize K.K. songs
+        Intent intent = new Intent(this, ACActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         createNotificationChannel();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "Service")
                 .setSmallIcon(R.drawable.ic_leaf)
                 .setContentTitle("Chill out to them funky fresh jams!")
                 .setContentText("K.K. style!")
-                .setColor(ContextCompat.getColor(this, R.color.leafGreen));
+                .setColor(ContextCompat.getColor(this, R.color.leafGreen))
+                .setContentIntent(pendingIntent);
 
         Notification notification = builder.build();
-        startForeground(1337, notification);
+        startForeground(1, notification);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        kk_pref = intent.getIntExtra("kk", 2);
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
         int song = findSong(hour, day); //Find the current song to play
         mp = MediaPlayer.create(this, song);
-        mp.setLooping(true);
         mp.start();
+        mp.setOnCompletionListener(this);
         fadeIn(0.05f);
         return START_STICKY;
     }
@@ -110,9 +117,16 @@ public class SunnyService_ac extends Service {
         int n;
         Random rand = new Random();
 
-        if(d == 7 && h >= 20) {
-            n = kksongs[rand.nextInt(56)];
+        if((kk_pref == 1) && (d == 7 && h >= 20)) {
+            if(mp != null && mp.isLooping()) {
+                mp.setLooping(false);
+            }
+            n = kksongs[rand.nextInt(70)];
             return n;
+        }
+
+        if(mp != null && !mp.isLooping()) {
+            mp.setLooping(true);
         }
 
         n = sunnySongs[h];
@@ -121,8 +135,29 @@ public class SunnyService_ac extends Service {
 
     //Initialize K.K. songs from res/raw
     public void setUpKK() {
-        for(int i=1; i<=56; i++) {
-            kksongs[i-1] = this.getResources().getIdentifier("kk".concat(Integer.toString(i)).concat("_ac"), "raw", this.getPackageName());
+        for(int i=1; i<=70; i++) {
+            kksongs[i-1] = this.getResources().getIdentifier("kk".concat(Integer.toString(i)), "raw", this.getPackageName());
+        }
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp1) {
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+
+        if(kk_pref == 2) {
+            if(!mp.isLooping()) {
+                mp = MediaPlayer.create(this, findSong(hour, day));
+                mp.setLooping(true);
+                mp.start();
+            }
+        }
+        else if(kk_pref == 1) {
+            mp = MediaPlayer.create(this, findSong(hour,day));
+            if(mp.isLooping()) {
+                mp.setLooping(false);
+            }
+            mp.start();
         }
     }
 }

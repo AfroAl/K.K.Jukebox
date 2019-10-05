@@ -22,4 +22,14 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="always_play_k_k_songs">Always play K.K. songs!</string>
+    <string name="play_k_k_songs_on_saturday_8pm_12pm_only">Play K.K. songs on Saturday (8pm - 12pm) only!</string>
+    <string name="never_play_k_k_songs">Never play K.K. songs!</string>
+    <string name="image_of_kk">Image of KK</string>
+    <string name="pause_button">Pause button</string>
+    <string name="sunny">Sunny</string>
+    <string name="rainy">Rainy</string>
+    <string name="ac">AC</string>
+    <string name="acnl">ACNL</string>
+    <string name="snowy">Snowy</string>
 </resources>

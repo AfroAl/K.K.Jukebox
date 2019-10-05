@@ -8,17 +8,22 @@
     tools:context=".ACActivity"
     tools:showIn="@layout/activity_ac">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <ImageButton
+        android:id="@+id/kk_ac"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@android:color/transparent"
+        android:onClick="onClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/kk" />
+        app:srcCompat="@drawable/kk"
+        android:contentDescription="@string/image_of_kk" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -48,7 +53,8 @@
                 android:onClick="onClick"
                 android:outlineProvider="none"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/pause" />
+                app:srcCompat="@drawable/pause"
+                android:contentDescription="@string/pause_button" />
 
         </LinearLayout>
 
@@ -69,15 +75,17 @@
                 android:id="@+id/sunny_ac"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/leafGreen"
                 android:checked="true"
-                android:text="Sunny"
+                android:text="@string/sunny"
                 android:visibility="visible" />
 
             <RadioButton
                 android:id="@+id/rainy_ac"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
-                android:text="Rainy"
+                android:buttonTint="@color/leafGreen"
+                android:text="@string/rainy"
                 android:visibility="visible" />
 
         </RadioGroup>
@@ -97,7 +105,8 @@
                 android:backgroundTint="@android:color/background_light"
                 android:clickable="false"
                 android:onClick="onClick"
-                android:text="AC" />
+                android:text="@string/ac"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/accf_ac"
@@ -106,7 +115,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="#D5D3D3"
                 android:onClick="onClick"
-                android:text="@string/accf" />
+                android:text="@string/accf"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/acnl_ac"
@@ -116,7 +126,8 @@
                 android:backgroundTint="#D5D3D3"
                 android:clickable="true"
                 android:onClick="onClick"
-                android:text="ACNL" />
+                android:text="@string/acnl"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
 
     </LinearLayout>
