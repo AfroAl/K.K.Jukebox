@@ -28,7 +28,7 @@ public class RainyService_ac extends Service implements MediaPlayer.OnCompletion
     private float speed = 0.05f;
 
     //Array for songs
-    private int[] kksongs = new int[70];
+    private int[] kksongs = new int[146];
 
     //Found out current song
     public void fadeOut(float deltaT) {
@@ -121,7 +121,7 @@ public class RainyService_ac extends Service implements MediaPlayer.OnCompletion
             if(mp != null && mp.isLooping()) {
                 mp.setLooping(false);
             }
-            n = kksongs[rand.nextInt(70)];
+            n = kksongs[rand.nextInt(146)];
             return n;
         }
 
@@ -135,7 +135,7 @@ public class RainyService_ac extends Service implements MediaPlayer.OnCompletion
 
     //Initialize K.K. songs from res/raw
     public void setUpKK() {
-        for(int i=1; i<=70; i++) {
+        for(int i=1; i<=146; i++) {
             kksongs[i-1] = this.getResources().getIdentifier("kk".concat(Integer.toString(i)), "raw", this.getPackageName());
         }
     }

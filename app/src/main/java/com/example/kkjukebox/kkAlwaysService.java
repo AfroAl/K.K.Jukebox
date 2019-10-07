@@ -25,7 +25,7 @@ public class kkAlwaysService extends Service implements MediaPlayer.OnCompletion
     private float speed = 0.05f;
 
     //Arrays for songs
-    private int[] kksongs = new int[70];
+    private int[] kksongs = new int[146];
 
     //Found out current song
     public void fadeOut(float deltaT) {
@@ -106,13 +106,13 @@ public class kkAlwaysService extends Service implements MediaPlayer.OnCompletion
     public int findSong() {
         int n;
         Random rand = new Random();
-        n = kksongs[rand.nextInt(70)];
+        n = kksongs[rand.nextInt(146)];
         return n;
     }
 
     //Initialize K.K. songs from res/raw
     public void setUpKK() {
-        for(int i=1; i<=70; i++) {
+        for(int i=1; i<=146; i++) {
             kksongs[i-1] = this.getResources().getIdentifier("kk".concat(Integer.toString(i)), "raw", this.getPackageName());
         }
     }

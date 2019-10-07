@@ -27,7 +27,8 @@ public class RainyService_accf extends Service implements MediaPlayer.OnCompleti
     private float speed = 0.05f;
 
     //Arrays for songs
-    private int[] kksongs = new int[70];
+    private int[] kksongs = new int[146];
+    private int song;
     private int[] rainySongs = {R.raw.r0_accf, R.raw.r1_accf, R.raw.r2_accf, R.raw.r3_accf, R.raw.r4_accf, R.raw.r5_accf, R.raw.r6_accf, R.raw.r7_accf, R.raw.r8_accf, R.raw.r9_accf, R.raw.r10_accf, R.raw.r11_accf, R.raw.r12_accf, R.raw.r13_accf, R.raw.r14_accf, R.raw.r15_accf, R.raw.r16_accf, R.raw.r17_accf, R.raw.r18_accf, R.raw.r19_accf, R.raw.r20_accf, R.raw.r21_accf, R.raw.r22_accf, R.raw.r23_accf};
 
     //Found out current song
@@ -97,7 +98,7 @@ public class RainyService_accf extends Service implements MediaPlayer.OnCompleti
         kk_pref = intent.getIntExtra("kk", 2);
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        int song = findSong(hour, day); //Find the current song to play
+        song = findSong(hour, day); //Find the current song to play
         mp = MediaPlayer.create(this, song);
         mp.start();
         mp.setOnCompletionListener(this);
@@ -123,7 +124,7 @@ public class RainyService_accf extends Service implements MediaPlayer.OnCompleti
             if(mp != null && mp.isLooping()) {
                 mp.setLooping(false);
             }
-            n = kksongs[rand.nextInt(70)];
+            n = kksongs[rand.nextInt(146)];
             return n;
         }
 
@@ -137,7 +138,7 @@ public class RainyService_accf extends Service implements MediaPlayer.OnCompleti
 
     //Initialize K.K. songs from res/raw
     public void setUpKK() {
-        for(int i=1; i<=70; i++) {
+        for(int i=1; i<=146; i++) {
             kksongs[i-1] = this.getResources().getIdentifier("kk".concat(Integer.toString(i)), "raw", this.getPackageName());
         }
     }

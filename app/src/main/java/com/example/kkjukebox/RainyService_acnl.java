@@ -27,7 +27,7 @@ public class RainyService_acnl extends Service implements MediaPlayer.OnCompleti
     private float speed = 0.05f;
 
     //Arrays for songs
-    private int[] kksongs = new int[70];
+    private int[] kksongs = new int[146];
     private int[] rainySongs = {R.raw.r0_acnl, R.raw.r1_acnl, R.raw.r2_acnl, R.raw.r3_acnl, R.raw.r4_acnl, R.raw.r5_acnl, R.raw.r6_acnl, R.raw.r7_acnl, R.raw.r8_acnl, R.raw.r9_acnl, R.raw.r10_acnl, R.raw.r11_acnl, R.raw.r12_acnl, R.raw.r13_acnl, R.raw.r14_acnl, R.raw.r15_acnl, R.raw.r16_acnl, R.raw.r17_acnl, R.raw.r18_acnl, R.raw.r19_acnl, R.raw.r20_acnl, R.raw.r21_acnl, R.raw.r22_acnl, R.raw.r23_acnl};
 
     //Found out current song
@@ -123,7 +123,7 @@ public class RainyService_acnl extends Service implements MediaPlayer.OnCompleti
             if(mp != null && mp.isLooping()) {
                 mp.setLooping(false);
             }
-            n = kksongs[rand.nextInt(70)];
+            n = kksongs[rand.nextInt(146)];
             return n;
         }
 
@@ -137,7 +137,7 @@ public class RainyService_acnl extends Service implements MediaPlayer.OnCompleti
 
     //Initialize K.K. songs from res/raw
     public void setUpKK() {
-        for(int i=1; i<=70; i++) {
+        for(int i=1; i<=146; i++) {
             kksongs[i-1] = this.getResources().getIdentifier("kk".concat(Integer.toString(i)), "raw", this.getPackageName());
         }
     }

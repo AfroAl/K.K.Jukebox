@@ -27,7 +27,7 @@ public class SunnyService_ac extends Service implements MediaPlayer.OnCompletion
     private float speed = 0.05f;
 
     //Arrays for songs
-    private int[] kksongs = new int[70];
+    private int[] kksongs = new int[146];
     private int[] sunnySongs = {R.raw.s0_ac, R.raw.s1_ac, R.raw.s2_ac, R.raw.s3_ac, R.raw.s4_ac, R.raw.s5_ac, R.raw.s6_ac, R.raw.s7_ac, R.raw.s8_ac, R.raw.s9_ac, R.raw.s10_ac, R.raw.s11_ac, R.raw.s12_ac, R.raw.s13_ac, R.raw.s14_ac, R.raw.s15_ac, R.raw.s16_ac, R.raw.s17_ac, R.raw.s18_ac, R.raw.s19_ac, R.raw.s20_ac, R.raw.s21_ac, R.raw.s22_ac, R.raw.s23_ac};
 
     //Found out current song
@@ -121,7 +121,7 @@ public class SunnyService_ac extends Service implements MediaPlayer.OnCompletion
             if(mp != null && mp.isLooping()) {
                 mp.setLooping(false);
             }
-            n = kksongs[rand.nextInt(70)];
+            n = kksongs[rand.nextInt(146)];
             return n;
         }
 
@@ -135,7 +135,7 @@ public class SunnyService_ac extends Service implements MediaPlayer.OnCompletion
 
     //Initialize K.K. songs from res/raw
     public void setUpKK() {
-        for(int i=1; i<=70; i++) {
+        for(int i=1; i<=146; i++) {
             kksongs[i-1] = this.getResources().getIdentifier("kk".concat(Integer.toString(i)), "raw", this.getPackageName());
         }
     }
